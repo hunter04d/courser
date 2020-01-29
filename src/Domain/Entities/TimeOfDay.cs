@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public class TimeOfDay : IEquatable<TimeOfDay>
+    public class TimeOfDay : IEquatable<TimeOfDay>, IComparable<TimeOfDay>
     {
         public TimeOfDay(byte hour, byte minute)
         {
@@ -33,5 +34,29 @@ namespace Domain.Entities
         public static bool operator ==(TimeOfDay? left, TimeOfDay? right) => Equals(left, right);
 
         public static bool operator !=(TimeOfDay? left, TimeOfDay? right) => !Equals(left, right);
+
+        public static bool operator <(TimeOfDay? left, TimeOfDay? right) =>
+            Comparer<TimeOfDay>.Default.Compare(left, right) < 0;
+
+        public static bool operator >(TimeOfDay? left, TimeOfDay? right) =>
+            Comparer<TimeOfDay>.Default.Compare(left, right) > 0;
+
+        public static bool operator <=(TimeOfDay? left, TimeOfDay? right) =>
+            Comparer<TimeOfDay>.Default.Compare(left, right) <= 0;
+
+        public static bool operator >=(TimeOfDay? left, TimeOfDay? right) =>
+            Comparer<TimeOfDay>.Default.Compare(left, right) >= 0;
+
+        public int CompareTo(TimeOfDay? other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            if (Hour == other.Hour)
+            {
+                return Minute.CompareTo(other.Minute);
+            }
+
+            return Hour.CompareTo(other.Hour);
+        }
     }
 }

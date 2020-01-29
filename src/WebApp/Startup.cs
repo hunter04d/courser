@@ -1,4 +1,6 @@
 using Application.Abstractions;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,10 @@ namespace WebApp
             services.AddDbContext<IAppDbContext, AppDbContext>(options =>
                 options.UseNpgsql(connString)
             );
+
+            services.AddMediatR(typeof(Application.Application));
+
+            services.AddValidatorsFromAssemblyContaining(typeof(Application.Application));
 
             services.AddControllers().AddJsonOptions(options =>
             {

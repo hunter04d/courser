@@ -7,10 +7,9 @@ namespace Persistence
 {
     public class AppDbContext : DbContext, IAppDbContext
     {
-
         public DbSet<Course> Courses { get; set; }
 
-        public AppDbContext(DbContextOptions options): base(options)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
         }
 
