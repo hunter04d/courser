@@ -2,45 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Courses;
+using Application.Courses.Commands;
+using Application.Courses.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
     public class CoursesController : ApiController
     {
-
-        public CoursesController()
-        {
-        }
-
         [HttpGet("{id}")]
-        public Task<IActionResult> Get([FromRoute] Guid id)
-        {
-            return Task.FromResult<IActionResult>(NoContent());
-        }
+        public async Task<IActionResult> Get([FromRoute] Guid id) =>
+            Ok(await Mediator.Send(new GetCourse(id)));
 
         [HttpGet]
-        public Task<IActionResult> GetAll()
-        {
-            return Task.FromResult<IActionResult>(NoContent());
-        }
+        public async Task<IActionResult> GetAll() =>
+            Ok(await Mediator.Send(new GetAllCourses()));
 
         [HttpPost]
-        public Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] CourseInput input)
         {
-            return Task.FromResult<IActionResult>(NoContent());
+            var dto = await Mediator.Send(new CreateCourse(input));
+            return CreatedAtAction(nameof(Get), new {dto.Id}, dto);
         }
 
+
         [HttpPut]
-        public Task<IActionResult> Update()
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CourseDto dto)
         {
-            return Task.FromResult<IActionResult>(NoContent());
+            await Mediator.Send(new UpdateCourse(id, dto));
+            return NoContent();
         }
 
         [HttpDelete]
-        public Task<IActionResult> Delete()
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            return Task.FromResult<IActionResult>(NoContent());
+            await Mediator.Send(new DeleteCourse(id));
+            return Ok();
         }
     }
 }
