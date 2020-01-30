@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Courses;
+using Common;
 using Domain.Entities;
 using FluentAssertions;
 using Xunit;

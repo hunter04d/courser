@@ -1,18 +1,32 @@
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities
+namespace Common
 {
+    /// <summary>
+    /// Primitive type that describes a time of day
+    /// </summary>
     public class TimeOfDay : IEquatable<TimeOfDay>, IComparable<TimeOfDay>
     {
+        public TimeOfDay()
+        {
+        }
+
         public TimeOfDay(byte hour, byte minute)
         {
             Hour = hour;
             Minute = minute;
         }
 
-        public byte Hour { get; private set; }
-        public byte Minute { get; private set; }
+        /// <summary>
+        /// Hour of the time
+        /// </summary>
+        public byte Hour { get;  set; }
+        
+        /// <summary>
+        /// Minute of the time
+        /// </summary>
+        public byte Minute { get; set; }
 
         public bool Equals(TimeOfDay? other)
         {

@@ -47,7 +47,7 @@ namespace Application.Courses.Commands
 
         public class Validator : AbstractValidator<UpdateCourse>
         {
-            public Validator() => RuleFor(c => c.Input).SetValidator(new CourseInputValidator());
+            public Validator() => RuleFor(c => c.Input).SetValidator(new CourseDtoValidator());
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Courses;
 using Application.Courses.Commands;
+using Common;
 using Domain.Entities;
 using FluentAssertions;
 using Xunit;

@@ -2,7 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Nullable>enable</Nullable>
+        <NoWarn>1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,10 +15,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Infrustructure" />
     </ItemGroup>
 
 </Project>

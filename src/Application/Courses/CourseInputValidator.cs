@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Application.Common;
+using Common;
 using FluentValidation;
 
 namespace Application.Courses
@@ -14,9 +14,9 @@ namespace Application.Courses
         {
             RuleFor(course => course.DayOfWeek).Must(day => ValidDays.Any(d => d == day))
                 .WithMessage("dayOfWeek must be work a work day");
-            RuleFor(course => course.Name).NotEmpty().MaximumLength(400);
-            RuleFor(course => course.StartTime).SetValidator(new TimeOfDayValidator());
-            RuleFor(course => course.EndTime).SetValidator(new TimeOfDayValidator());
+            RuleFor(course => course.Name).NotEmpty().NotNull().MaximumLength(400);
+            RuleFor(course => course.StartTime).SetValidator(new TimeOfDayValidator()).NotNull();
+            RuleFor(course => course.EndTime).SetValidator(new TimeOfDayValidator()).NotNull();
             RuleFor(course => course.Price).GreaterThanOrEqualTo(0);
 
             RuleFor(course => course).Must(course => course.StartTime < course.EndTime)

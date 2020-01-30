@@ -1,8 +1,6 @@
-using Domain.Entities;
 using FluentValidation;
-using FluentValidation.Results;
 
-namespace Application.Common
+namespace Common
 {
     public class TimeOfDayValidator : AbstractValidator<TimeOfDay>
     {

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Persistence.Configuration
 {
     /// <summary>
-    /// Persistence configuration of Course
+    /// Persistence configuration of Course entity
     /// </summary>
     public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {

@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common\Common.csproj" />
+      <PackageReference Include="FluentValidation" Version="8.6.1" />
     </ItemGroup>
 
 </Project>

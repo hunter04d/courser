@@ -7,12 +7,12 @@ using MediatR;
 
 namespace Application.Courses.Commands
 {
-    public class CreateCourse : IRequest<Course>
+    public class CreateCourse : IRequest<CourseDto>
     {
         public CreateCourse(CourseInput input) => Input = input;
         public CourseInput Input { get; }
 
-        public class Handler : IRequestHandler<CreateCourse, Course>
+        public class Handler : IRequestHandler<CreateCourse, CourseDto>
         {
             private readonly IAppDbContext _dbContext;
 
@@ -21,7 +21,7 @@ namespace Application.Courses.Commands
                 _dbContext = dbContext;
             }
 
-            public async Task<Course> Handle(CreateCourse request, CancellationToken cancellationToken)
+            public async Task<CourseDto> Handle(CreateCourse request, CancellationToken cancellationToken)
             {
                 var courseInput = request.Input;
                 var course = new Course
@@ -34,7 +34,17 @@ namespace Application.Courses.Commands
                 };
                 await _dbContext.Courses.AddAsync(course, cancellationToken);
                 await _dbContext.SaveChangesAsync(cancellationToken);
-                return course;
+
+
+                return new CourseDto
+                {
+                    Id = course.Id,
+                    Name = course.Name,
+                    DayOfWeek = course.DayOfWeek,
+                    Price = course.Price,
+                    StartTime = course.StartTime,
+                    EndTime = course.EndTime,
+                };
             }
         }
 

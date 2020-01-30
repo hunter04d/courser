@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using WebApp.Filters;
 
 namespace WebApp.Controllers
 {
@@ -9,6 +10,7 @@ namespace WebApp.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
+    [ApiExceptionFilter]
     public abstract class ApiController : ControllerBase
     {
         private IMediator _mediator = null!;

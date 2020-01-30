@@ -6,7 +6,7 @@ namespace Application.Test
 {
     public class CommandsTestsBase : IDisposable
     {
-        protected AppDbContext DbContext;
+        protected readonly AppDbContext DbContext;
 
         public CommandsTestsBase()
         {
