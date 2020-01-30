@@ -8,6 +8,9 @@ using MediatR;
 
 namespace Application.Courses.Commands
 {
+    /// <summary>
+    /// Deletes the course with input id
+    /// </summary>
     public class DeleteCourse : IRequest<Unit>
     {
         public Guid Id { get; }

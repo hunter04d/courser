@@ -7,6 +7,9 @@ using MediatR;
 
 namespace Application.Courses.Commands
 {
+    /// <summary>
+    /// Creates a new course
+    /// </summary>
     public class CreateCourse : IRequest<CourseDto>
     {
         public CreateCourse(CourseInput input) => Input = input;

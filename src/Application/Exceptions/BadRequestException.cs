@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Application.Exceptions
 {
+    /// <summary>
+    /// Represents the bad request to the system
+    /// </summary>
     public class BadRequestException : Exception
     {
         public static BadRequestException From(Exception e)

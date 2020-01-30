@@ -9,6 +9,9 @@ using MediatR;
 
 namespace Application.Courses.Commands
 {
+    /// <summary>
+    /// Updates the course with new information
+    /// </summary>
     public class UpdateCourse : IRequest<Unit>
     {
         public Guid Id { get; }
