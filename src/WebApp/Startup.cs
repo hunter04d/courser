@@ -58,20 +58,15 @@ namespace WebApp
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                if (_env.IsDevelopment())
-                {
-                    options.JsonSerializerOptions.WriteIndented = true;
-                }
+
+                if (_env.IsDevelopment()) options.JsonSerializerOptions.WriteIndented = true;
             }).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Application.Application>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
 
@@ -81,10 +76,7 @@ namespace WebApp
             app.UseAuthorization();
 
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Courser API");
-            });
+            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Courser API"); });
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

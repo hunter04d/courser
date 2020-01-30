@@ -11,8 +11,8 @@ namespace Application.Courses.Commands
 {
     public class UpdateCourse : IRequest<Unit>
     {
-        public Guid Id { get; set; }
-        public CourseDto Input { get; set; }
+        public Guid Id { get; }
+        public CourseDto Input { get; }
 
         public UpdateCourse(Guid id, CourseDto input) => (Id, Input) = (id, input);
 
@@ -21,15 +21,16 @@ namespace Application.Courses.Commands
         public class Handler : IRequestHandler<UpdateCourse>
         {
             private readonly IAppDbContext _dbContext;
-            public Handler(IAppDbContext dbContext) => _dbContext = dbContext;
+
+            public Handler(IAppDbContext dbContext)
+            {
+                _dbContext = dbContext;
+            }
 
             public async Task<Unit> Handle(UpdateCourse request, CancellationToken cancellationToken)
             {
                 var (id, courseDto) = request;
-                if (id != courseDto.Id)
-                {
-                    return Unit.Value;
-                }
+                if (id != courseDto.Id) return Unit.Value;
 
                 var course = await _dbContext.Courses.FindAsync(id) ?? throw new NotFoundException(nameof(Course), id);
 
@@ -47,7 +48,10 @@ namespace Application.Courses.Commands
 
         public class Validator : AbstractValidator<UpdateCourse>
         {
-            public Validator() => RuleFor(c => c.Input).SetValidator(new CourseDtoValidator());
+            public Validator()
+            {
+                RuleFor(c => c.Input).SetValidator(new CourseDtoValidator());
+            }
         }
     }
 }

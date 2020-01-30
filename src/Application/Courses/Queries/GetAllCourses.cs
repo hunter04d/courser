@@ -15,10 +15,14 @@ namespace Application.Courses.Queries
         {
             private readonly IAppDbContext _dbContext;
 
-            public Handler(IAppDbContext dbContext) => _dbContext = dbContext;
+            public Handler(IAppDbContext dbContext)
+            {
+                _dbContext = dbContext;
+            }
 
-            public Task<IEnumerable<CourseDto>> Handle(GetAllCourses request, CancellationToken cancellationToken) =>
-                Task.FromResult(_dbContext.Courses.AsNoTracking().Select(course => new CourseDto
+            public Task<IEnumerable<CourseDto>> Handle(GetAllCourses request, CancellationToken cancellationToken)
+            {
+                return Task.FromResult(_dbContext.Courses.AsNoTracking().Select(course => new CourseDto
                 {
                     Id = course.Id,
                     Name = course.Name,
@@ -27,6 +31,7 @@ namespace Application.Courses.Queries
                     StartTime = course.StartTime,
                     EndTime = course.EndTime,
                 }).AsEnumerable());
+            }
         }
     }
 }

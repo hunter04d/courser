@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,13 @@ namespace WebApp.Filters
             var exception = context.Exception;
             switch (exception)
             {
-                case NotFoundException _:
+                case NotFoundException notFoundException:
                     context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-                    context.Result = new NotFoundResult();
+                    context.Result = new NotFoundObjectResult(new ValidationProblemDetails(
+                        new Dictionary<string, string[]>
+                        {
+                            [""] = new[] {notFoundException.Message},
+                        }));
                     return;
                 case BadRequestException badRequestException:
                     context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;

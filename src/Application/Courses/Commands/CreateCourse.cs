@@ -10,16 +10,14 @@ namespace Application.Courses.Commands
     public class CreateCourse : IRequest<CourseDto>
     {
         public CreateCourse(CourseInput input) => Input = input;
+
         public CourseInput Input { get; }
 
         public class Handler : IRequestHandler<CreateCourse, CourseDto>
         {
             private readonly IAppDbContext _dbContext;
 
-            public Handler(IAppDbContext dbContext)
-            {
-                _dbContext = dbContext;
-            }
+            public Handler(IAppDbContext dbContext) => _dbContext = dbContext;
 
             public async Task<CourseDto> Handle(CreateCourse request, CancellationToken cancellationToken)
             {
@@ -50,7 +48,10 @@ namespace Application.Courses.Commands
 
         public class Validator : AbstractValidator<CreateCourse>
         {
-            public Validator() => RuleFor(c => c.Input).SetValidator(new CourseInputValidator());
+            public Validator()
+            {
+                RuleFor(c => c.Input).SetValidator(new CourseInputValidator());
+            }
         }
     }
 }

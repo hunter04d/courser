@@ -9,7 +9,10 @@ namespace Application.Behaviors
     {
         private readonly ILogger<TRequest> _logger;
 
-        public RequestLogger(ILogger<TRequest> logger) => _logger = logger;
+        public RequestLogger(ILogger<TRequest> logger)
+        {
+            _logger = logger;
+        }
 
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {

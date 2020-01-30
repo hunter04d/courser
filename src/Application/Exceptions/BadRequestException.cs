@@ -26,6 +26,6 @@ namespace Application.Exceptions
         }
 
 
-        public IDictionary <string, string[]> Errors { get; }
+        public IDictionary<string, string[]> Errors { get; }
     }
 }

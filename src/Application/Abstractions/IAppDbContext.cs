@@ -7,7 +7,6 @@ namespace Application.Abstractions
 {
     public interface IAppDbContext
     {
-
         DbSet<Course> Courses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

@@ -16,7 +16,7 @@ namespace Application.Test.Courses
     {
         [Theory]
         [MemberData(nameof(Data))]
-        void CreateCourseValidator_ShouldValidateProperly(CourseInput input, bool valid)
+        public void CreateCourseValidator_ShouldValidateProperly(CourseInput input, bool valid)
         {
             var validator = new CourseInputValidator();
             var result = validator.Validate(input);

@@ -11,13 +11,17 @@ namespace Application.Courses.Commands
     public class DeleteCourse : IRequest<Unit>
     {
         public Guid Id { get; }
+
         public DeleteCourse(Guid id) => Id = id;
 
         public class Handler : IRequestHandler<DeleteCourse>
         {
             private readonly IAppDbContext _dbContext;
 
-            public Handler(IAppDbContext dbContext) => _dbContext = dbContext;
+            public Handler(IAppDbContext dbContext)
+            {
+                _dbContext = dbContext;
+            }
 
             public async Task<Unit> Handle(DeleteCourse request, CancellationToken cancellationToken)
             {

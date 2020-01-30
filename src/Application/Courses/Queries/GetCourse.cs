@@ -12,7 +12,10 @@ namespace Application.Courses.Queries
     {
         public Guid Id { get; }
 
-        public GetCourse(Guid courseId) => Id = courseId;
+        public GetCourse(Guid courseId)
+        {
+            Id = courseId;
+        }
 
         public class Handler : IRequestHandler<GetCourse, CourseDto>
         {
@@ -23,7 +26,7 @@ namespace Application.Courses.Queries
             public async Task<CourseDto> Handle(GetCourse request, CancellationToken cancellationToken)
             {
                 var course = await _dbContext.Courses.FindAsync(request.Id) ??
-                       throw new NotFoundException(nameof(Course), request.Id);
+                             throw new NotFoundException(nameof(Course), request.Id);
                 return new CourseDto
                 {
                     Id = course.Id,

@@ -28,10 +28,7 @@ namespace Application.Behaviors
                 .Where(e => e != null)
                 .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
                 .ToDictionary(grouping => grouping.Key, grouping => grouping.ToArray());
-            if (keyErrorPair.Count != 0)
-            {
-                throw new BadRequestException(keyErrorPair);
-            }
+            if (keyErrorPair.Count != 0) throw new BadRequestException(keyErrorPair);
 
             return next();
         }

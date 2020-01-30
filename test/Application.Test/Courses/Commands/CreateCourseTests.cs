@@ -22,7 +22,7 @@ namespace Application.Test.Courses.Commands
 
 
         [Fact]
-        async Task CreateCourseHandler_ShouldAddItemToDatabase()
+        private async Task CreateCourseHandler_ShouldAddItemToDatabase()
         {
             var input = new CourseInput
             {

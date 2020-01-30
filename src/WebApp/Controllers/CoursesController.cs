@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Application.Courses;
 using Application.Courses.Commands;
 using Application.Courses.Queries;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
@@ -35,6 +32,7 @@ namespace WebApp.Controllers
         /// </summary>
         [HttpPost]
         [ProducesResponseType(typeof(CourseDto), 201)]
+        [ProducesResponseType(typeof(ProblemDetails), 400)]
         public async Task<IActionResult> Create([FromBody] CourseInput input)
         {
             var dto = await Mediator.Send(new CreateCourse(input));
@@ -59,6 +57,8 @@ namespace WebApp.Controllers
         /// </summary>
         /// <param name="id">the id of the course to delete</param>
         [HttpDelete]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ProblemDetails),404)]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             await Mediator.Send(new DeleteCourse(id));

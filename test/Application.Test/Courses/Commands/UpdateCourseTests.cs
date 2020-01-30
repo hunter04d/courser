@@ -50,7 +50,7 @@ namespace Application.Test.Courses.Commands
 
 
         [Fact]
-        async Task UpdateCourseHandler_ShouldUpdateCourse_IfIdIsValid()
+        public async Task UpdateCourseHandler_ShouldUpdateCourse_IfIdIsValid()
         {
             await _handler.Handle(new UpdateCourse(_targetCourse.Id, _input), CancellationToken.None);
             _targetCourse.Name.Should().Be(_input.Name);
@@ -61,7 +61,7 @@ namespace Application.Test.Courses.Commands
         }
 
         [Fact]
-        async Task UpdateCourseHandler_ShouldNoop_IfIdsMismatch()
+        public async Task UpdateCourseHandler_ShouldNoop_IfIdsMismatch()
         {
             await _handler.Handle(new UpdateCourse(new Guid(), _input), CancellationToken.None);
 
@@ -69,7 +69,7 @@ namespace Application.Test.Courses.Commands
         }
 
         [Fact]
-        async Task UpdateCourseHandler_ShouldThrow_IsItemIsNotFound()
+        public async Task UpdateCourseHandler_ShouldThrow_IsItemIsNotFound()
         {
             _input.Id = new Guid();
             await Assert.ThrowsAsync<NotFoundException>(() =>

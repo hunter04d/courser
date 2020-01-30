@@ -21,8 +21,8 @@ namespace Common
         /// <summary>
         /// Hour of the time
         /// </summary>
-        public byte Hour { get;  set; }
-        
+        public byte Hour { get; set; }
+
         /// <summary>
         /// Minute of the time
         /// </summary>
@@ -43,32 +43,46 @@ namespace Common
             return Equals((TimeOfDay) obj);
         }
 
-        public override int GetHashCode() => HashCode.Combine(Hour, Minute);
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Hour, Minute);
+        }
 
-        public static bool operator ==(TimeOfDay? left, TimeOfDay? right) => Equals(left, right);
+        public static bool operator ==(TimeOfDay? left, TimeOfDay? right)
+        {
+            return Equals(left, right);
+        }
 
-        public static bool operator !=(TimeOfDay? left, TimeOfDay? right) => !Equals(left, right);
+        public static bool operator !=(TimeOfDay? left, TimeOfDay? right)
+        {
+            return !Equals(left, right);
+        }
 
-        public static bool operator <(TimeOfDay? left, TimeOfDay? right) =>
-            Comparer<TimeOfDay>.Default.Compare(left, right) < 0;
+        public static bool operator <(TimeOfDay? left, TimeOfDay? right)
+        {
+            return Comparer<TimeOfDay>.Default.Compare(left, right) < 0;
+        }
 
-        public static bool operator >(TimeOfDay? left, TimeOfDay? right) =>
-            Comparer<TimeOfDay>.Default.Compare(left, right) > 0;
+        public static bool operator >(TimeOfDay? left, TimeOfDay? right)
+        {
+            return Comparer<TimeOfDay>.Default.Compare(left, right) > 0;
+        }
 
-        public static bool operator <=(TimeOfDay? left, TimeOfDay? right) =>
-            Comparer<TimeOfDay>.Default.Compare(left, right) <= 0;
+        public static bool operator <=(TimeOfDay? left, TimeOfDay? right)
+        {
+            return Comparer<TimeOfDay>.Default.Compare(left, right) <= 0;
+        }
 
-        public static bool operator >=(TimeOfDay? left, TimeOfDay? right) =>
-            Comparer<TimeOfDay>.Default.Compare(left, right) >= 0;
+        public static bool operator >=(TimeOfDay? left, TimeOfDay? right)
+        {
+            return Comparer<TimeOfDay>.Default.Compare(left, right) >= 0;
+        }
 
         public int CompareTo(TimeOfDay? other)
         {
             if (ReferenceEquals(this, other)) return 0;
             if (ReferenceEquals(null, other)) return 1;
-            if (Hour == other.Hour)
-            {
-                return Minute.CompareTo(other.Minute);
-            }
+            if (Hour == other.Hour) return Minute.CompareTo(other.Minute);
 
             return Hour.CompareTo(other.Hour);
         }

@@ -8,7 +8,7 @@ namespace Application.Courses
     ///
     /// Note that start time should come before the end time in the day
     /// </summary>
-    public class CourseDto: CourseInput
+    public class CourseDto : CourseInput
     {
         public Guid Id { get; set; }
     }
